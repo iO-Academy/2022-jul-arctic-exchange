@@ -17,15 +17,26 @@ const NewExchangeForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
+        fetch(document.url + '/exchange' , {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: {
+                message: "",
+                data: {
+                    exchangeName: name,
+                    exchangeDate: date
+                }
+            }
+        })
     }
 
 
     return (
         <card className={"formCard"}>
             <h2>Create Your Gift Exchange</h2>
-            <form className={"exchangeForm"} onSubmit={handleSubmit}>
-                <input type={"name"} value={name} onChange={handleChangeName} />
-                <DatePicker className="date-picker" selected={date} onChange={date => setDate(date)} />
+            <form className={"exchangeForm"} onSubmit={handleSubmit} >
+                <input type={"name"} value={name} onChange={handleChangeName} required/>
+                <DatePicker className="date-picker" selected={date} onChange={date => setDate(date)} required/>
                 <input type={"submit"} name={"submit"} className={"submit"} />
             </form>
         </card>
