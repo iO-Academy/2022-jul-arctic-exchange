@@ -3,6 +3,7 @@
   align-content: center;
   display: flex;
   flex-direction: column;
+  font-family: 'Permanent Marker', cursive;
 }
 
 .App-logo {
@@ -17,8 +18,10 @@
 }
 
 h1 {
-  /*position: absolute;*/
+  padding: 125px 0 30px 0;
   z-index: 10;
+  margin: 0 auto;
+  font-size: 6rem;
 }
 
 @media (prefers-reduced-motion: no-preference) {

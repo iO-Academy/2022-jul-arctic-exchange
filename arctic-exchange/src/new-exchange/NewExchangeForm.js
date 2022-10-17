@@ -26,7 +26,7 @@ const NewExchangeForm = () => {
             <form className={"exchangeForm"} onSubmit={handleSubmit}>
                 <input type={"name"} value={name} onChange={handleChangeName} />
                 <DatePicker className="date-picker" selected={date} onChange={date => setDate(date)} />
-                <input type={"submit"} name={"submit"} />
+                <input type={"submit"} name={"submit"} className={"submit"} />
             </form>
         </card>
     )
