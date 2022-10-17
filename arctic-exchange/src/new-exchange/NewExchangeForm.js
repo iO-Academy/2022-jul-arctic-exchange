@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
+import "./NewExchangeForm.css"
 
 const NewExchangeForm = () => {
     const [name, setName] = useState('')
@@ -24,7 +25,7 @@ const NewExchangeForm = () => {
             <h2>Create Your Gift Exchange</h2>
             <form className={"exchangeForm"} onSubmit={handleSubmit}>
                 <input type={"name"} value={name} onChange={handleChangeName} />
-                <DatePicker selected={date} onChange={date => setDate(date)} />
+                <DatePicker className="date-picker" selected={date} onChange={date => setDate(date)} />
                 <input type={"submit"} name={"submit"} />
             </form>
         </card>

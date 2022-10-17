@@ -1,10 +1,24 @@
 .App {
   text-align: center;
+  align-content: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.App-Background {
+  z-index: 0;
+  width: 100%;
+  position: absolute;
+}
+
+h1 {
+  /*position: absolute;*/
+  z-index: 10;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -36,3 +50,4 @@
     transform: rotate(360deg);
   }
 }
+

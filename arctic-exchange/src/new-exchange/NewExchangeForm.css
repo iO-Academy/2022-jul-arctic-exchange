@@ -1,0 +1,17 @@
+.exchangeForm {
+    align-content: center;
+    z-index: 10;
+    /*position: absolute;*/
+}
+
+.formCard {
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+h2 {
+    z-index: 10;
+}
