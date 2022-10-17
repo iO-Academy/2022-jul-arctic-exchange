@@ -1,9 +1,13 @@
 const DbService = require('../Services/DbService')
 
 const verifyDateIsFuture = (date) => {
+    console.log(date)
+
     const today = new Date()
     const inputDate = new Date(date)
-    return inputDate > today;
+    console.log(today)
+    console.log(inputDate)
+    return inputDate > today
 }
 
 async function createExchange(req, res) {
@@ -15,7 +19,7 @@ async function createExchange(req, res) {
     const newExchangeData = {
         exchangeName: req.body.data.exchangeName,
         exchangeDate: req.body.data.exchangeDate,
-        isPostal: req.body.data.isPostal,
+        isPostal: req.body.data.isPostal
     }
     const isFuture = verifyDateIsFuture(newExchangeData.exchangeDate)
     const nameLength = newExchangeData.exchangeName.length
@@ -35,5 +39,4 @@ async function createExchange(req, res) {
     }
 }
 
-
-module.exports = {createExchange}
+module.exports = {createExchange: createExchange}
