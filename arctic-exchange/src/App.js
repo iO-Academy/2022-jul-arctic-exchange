@@ -2,9 +2,10 @@
 import './App.css';
 import NewExchangeForm from "./new-exchange/NewExchangeForm";
 import imageSrc from "./envelopeBackground.jpg"
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
 
-function App() {
+const App = () => {
   return (
         <div className="App">
             <header>
@@ -58,7 +59,11 @@ function App() {
             </div>
             <h1 className={""}>Arctic Exchange</h1>
             <img src={imageSrc} alt={"envelope background"} className={"App-Background"}></img>
-            <NewExchangeForm />
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" index element={<NewExchangeForm />} />
+                </Routes>
+            </BrowserRouter>
         </div>
   );
 }
