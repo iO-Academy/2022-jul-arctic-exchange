@@ -26,7 +26,7 @@ async function createExchange(req, res) {
         isPostal: req.body.data.isPostal,
         adminUrl: adminUrl,
         participantUrl: participantUrl,
-        participants: {}
+        participants: []
     }
     const isFuture = verifyDateIsFuture(newExchangeData.exchangeDate)
     const nameLength = newExchangeData.exchangeName.length
