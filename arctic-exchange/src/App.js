@@ -13,6 +13,49 @@ function App() {
                         <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap"
                               rel="stylesheet"/>
             </header>
+            <div className="snowflakes" aria-hidden="true">
+                <div className="intro"> Find 250+ Ready to use demo at <a
+                    href="https://codeconvey.com">Codeconvey.com</a></div>
+                <div className="snowflake">
+                    ❅
+                </div>
+                <div className="snowflake">
+                    ❅
+                </div>
+                <div className="snowflake">
+                    ❆
+                </div>
+                <div className="snowflake">
+                    ❄
+                </div>
+                <div className="snowflake">
+                    ❅
+                </div>
+                <div className="snowflake">
+                    ❆
+                </div>
+                <div className="snowflake">
+                    ❄
+                </div>
+                <div className="snowflake">
+                    ❅
+                </div>
+                <div className="snowflake">
+                    ❆
+                </div>
+                <div className="snowflake">
+                    ❄
+                </div>
+                <div className="snowflake">
+                    ❄
+                </div>
+                <div className="snowflake">
+                    ❄
+                </div>
+                <div className="snowflake">
+                    ❄
+                </div>
+            </div>
             <h1 className={""}>Arctic Exchange</h1>
             <img src={imageSrc} alt={"envelope background"} className={"App-Background"}></img>
             <NewExchangeForm />
