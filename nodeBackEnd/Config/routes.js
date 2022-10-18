@@ -1,4 +1,4 @@
-// import participantController from '../Controllers/participantController'
+// const participantController = require('../Controllers/participantController')
 const exchangeController = require('../Controllers/ExchangeController')
 
 function routes(app){

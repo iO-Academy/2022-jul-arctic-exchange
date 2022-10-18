@@ -1,39 +1,17 @@
-import {connectToDb} from '../Services/DbService'
+import DbService, {connectToDb} from '../Services/DbService'
 import {ObjectId} from 'mongodb'
 
-async function getReminders(req, res) {
-    console.log(req.query.done)
-    let doneLowerCase
-    if (req.query.done !== undefined) {
-        doneLowerCase = req.query.done.toLowerCase()
+async function getParticipants(req, res) {
+    const collection = await DbService.connectToDb()
+    const participants = await collection.find({}).toArray()
+    const responseData = {
+        message: "Successfully retrieved all the participants",
+        data: participants
     }
-    const collection = await connectToDb()
-    if(doneLowerCase === 'true' || doneLowerCase === 'false')
-    {
-        const isDone = (doneLowerCase === 'true');
-        const remindersDone = await collection.find({done: isDone}).toArray()
-        const responseData = {
-            message: "Successfully retrieved all the " + isDone + " reminders",
-            data: remindersDone
-        }
-        res.status(200).json(responseData)
-    } else if (req.query.done === undefined) {
-        const reminders = await collection.find({}).toArray()
-        const responseData = {
-            message: "Successfully retrieved all the reminders",
-            data: reminders
-        }
-        res.status(200).json(responseData)
-    } else {
-        const responseData = {
-            message: "Failed to create reminder due to incorrect input",
-            data: [{}]
-        }
-        res.status(400).json(responseData)
-    }
+    res.status(200).json(responseData)
 }
 
-async function createReminder(req, res) {
+async function createParticipant(req, res) {
     const collection = await connectToDb()
     const newReminderData = {
         title: req.body.data.title,
@@ -58,7 +36,7 @@ async function createReminder(req, res) {
     }
 }
 
-async function changeReminder(req, res) {
+async function editParticipant(req, res) {
     const collection = await connectToDb()
     const oid = ObjectId(req.params.id)
 
@@ -78,7 +56,7 @@ async function changeReminder(req, res) {
     }
 }
 
-async function deleteReminder(req, res) {
+async function deleteParticipant(req, res) {
     const collection = await connectToDb()
     const oid = ObjectId(req.params.id)
 

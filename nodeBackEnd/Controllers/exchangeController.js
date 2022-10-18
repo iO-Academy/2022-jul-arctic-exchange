@@ -19,13 +19,14 @@ async function createExchange(req, res) {
     const newExchangeData = {
         exchangeName: req.body.data.exchangeName,
         exchangeDate: req.body.data.exchangeDate,
-        isPostal: req.body.data.isPostal
+        isPostal: req.body.data.isPostal,
+        participants: {}
     }
     const isFuture = verifyDateIsFuture(newExchangeData.exchangeDate)
     const nameLength = newExchangeData.exchangeName.length
     if (isFuture && nameLength !== 0) {
         const result = await collection.insertOne(newExchangeData)
-        if (result.acknowledged && nameLength !== 0) {
+        if (result.acknowledged) {
             const responseData = {
                 message: "Successfully created exchange",
                 data: [{}]
