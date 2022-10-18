@@ -1,0 +1,28 @@
+.App {
+  text-align: center;
+  align-content: center;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Permanent Marker', cursive;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-Background {
+  z-index: 0;
+  width: 100%;
+  position: absolute;
+}
+
+h1 {
+  padding: 125px 0 30px 0;
+  z-index: 10;
+  margin: 0 auto;
+  font-size: 8rem;
+}
+
+
+
