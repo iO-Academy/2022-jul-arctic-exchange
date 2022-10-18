@@ -1,12 +1,14 @@
 .formCard {
     display: flex;
     align-content: center;
+    justify-content: center;
     flex-direction: column;
     flex-wrap: wrap;
     z-index: 10;
     background-color: rgba(255,255,255,.5);
     margin: 0 auto;
     padding: 20px;
+    width: 75%;
 }
 
 .exchangeForm {
@@ -33,4 +35,47 @@ input {
     padding: 10px;
     border: none;
     border-radius: 12px;
+}
+
+@media only screen and (max-width: 1500px) {
+    .formCard {
+        padding: 0;
+        width: 75%;
+    }
+
+    .exchangeForm {
+        padding: 0;
+    }
+
+    h2 {
+        font-size: 2rem;
+        margin: 10px 0;
+    }
+
+    input {
+        font-size: 2rem;
+        padding: 5px;
+    }
+}
+
+
+@media only screen and (max-width: 600px) {
+    .formCard {
+        padding: 0;
+        width: 75%;
+    }
+
+    .exchangeForm {
+        padding: 0;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        margin: 10px 0;
+    }
+
+    input {
+        font-size: 1rem;
+        padding: 5px;
+    }
 }
