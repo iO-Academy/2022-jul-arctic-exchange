@@ -2,10 +2,13 @@ import {useState} from 'react'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 import "./NewExchangeForm.css"
+import {useNavigate} from 'react-router-dom';
+
 
 const NewExchangeForm = () => {
     const [name, setName] = useState('')
     const [date, setDate] = useState(new Date())
+    const navigate = useNavigate()
 
     const handleChangeName = (event) => {
         setName(event.target.value)
@@ -36,7 +39,7 @@ const NewExchangeForm = () => {
                 if(statusCode === 400) {
                     return alert('FAIL!')
                 } else {
-                    return alert('NO FAIL!')
+                    return navigate('/join')
                 }
             })
         })
@@ -49,7 +52,7 @@ const NewExchangeForm = () => {
             <form className={"exchangeForm"} onSubmit={handleSubmit} >
                 <input type={"name"} value={name} onChange={handleChangeName} required/>
                 <DatePicker className="date-picker" selected={date} onChange={date => setDate(date)} required/>
-                <input type={"submit"} name={"submit"} className={"submit"}/>
+                <input type={"submit"} name={"submit"} className={"submit"} />
             </form>
         </div>
     )

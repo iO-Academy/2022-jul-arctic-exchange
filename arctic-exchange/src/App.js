@@ -1,6 +1,7 @@
 
-import './App.css';
-import NewExchangeForm from "./new-exchange/NewExchangeForm";
+import './App.css'
+import NewExchangeForm from "./new-exchange/NewExchangeForm"
+import JoinExchangePage from "./join-exchange-page/JoinExchangePage"
 import imageSrc from "./envelopeBackground.jpg"
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
@@ -62,6 +63,7 @@ const App = () => {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" index element={<NewExchangeForm />} />
+                    <Route path="join/:participantUrl" element={<JoinExchangePage />} />
                 </Routes>
             </BrowserRouter>
         </div>
