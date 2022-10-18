@@ -1,12 +1,14 @@
-import DbService, {connectToDb} from '../Services/DbService'
-import {ObjectId} from 'mongodb'
+const DbService = require('../Services/DbService')
+const ObjectId = require('mongodb').ObjectId
 
 async function getParticipants(req, res) {
+    const oid = ObjectId(req.params.id)
     const collection = await DbService.connectToDb()
-    const participants = await collection.find({}).toArray()
+    const exchange = await collection.findOne({_id: oid})
+    const participants = exchange.participants
     const responseData = {
         message: "Successfully retrieved all the participants",
-        data: participants
+        data: exchange.participants
     }
     res.status(200).json(responseData)
 }
@@ -14,7 +16,7 @@ async function getParticipants(req, res) {
 async function createParticipant(req, res) {
     const collection = await connectToDb()
     const newReminderData = {
-        title: req.body.data.title,
+        title: req.body.data.name,
         done: req.body.data.done
     }
     const titleLength = newReminderData.title.length
