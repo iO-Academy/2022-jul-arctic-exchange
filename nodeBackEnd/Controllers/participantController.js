@@ -1,36 +1,30 @@
 const DbService = require('../Services/DbService')
 const ObjectId = require('mongodb').ObjectId
-
-async function getParticipantsWithExchangeId(req, res) {
-    const exchangeId = ObjectId(req.params.exchangeId)
-    const collection = await DbService.connectToDb()
-    const exchange = await collection.findOne({_id: exchangeId})
-    const responseData = {
-        message: "Successfully retrieved all the participants",
-        data: exchange.participants
-    }
-    res.status(200).json(responseData)
-}
+const validator = require('email-validator')
 
 async function createParticipant(req, res) {
-    const collection = await connectToDb()
+    const collection = await DbService.connectToDb()
+    let result
     const newReminderData = {
-        title: req.body.data.name,
-        done: req.body.data.done
+        name: req.body.data.name,
+        email: req.body.data.email,
+        address: req.body.data.address
     }
-    const titleLength = newReminderData.title.length
-    console.log(titleLength)
-    const result = await collection.insertOne(newReminderData)
-    console.log(result.acknowledged)
-    if (result.acknowledged && titleLength <= 500 && titleLength !== 0) {
+    const nameLength = newReminderData.name.length
+    const addressLength = newReminderData.address.length
+
+    if(nameLength !== 0 && addressLength !== 0 && validator.validate(newReminderData.email)) {
+        result = await collection.insertOne(newReminderData)
+    }
+    if (result.acknowledged) {
         const responseData = {
-            message: "Successfully created reminder",
+            message: "Successfully created participant",
             data: [{}]
         }
         res.status(200).json(responseData)
     } else {
         const responseData = {
-            message: "Failed to create reminder due to incorrect input",
+            message: "Failed to create participant due to incorrect input",
             data: [{}]
         }
         res.status(400).json(responseData)

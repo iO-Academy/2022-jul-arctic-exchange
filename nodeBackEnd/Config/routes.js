@@ -11,9 +11,7 @@ function routes(app){
     app.post('/join', participantController.createParticipant)
 
     // app.put('/participants/:id', participantController.editParticipant)
-    //
-    // app.post('/participants', participantController.createParticipant)
-    //
+
     // app.delete('/participants/:id', participantController.deleteParticipant)
 }
 
