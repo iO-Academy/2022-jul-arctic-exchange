@@ -17,29 +17,41 @@ const NewExchangeForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        fetch(document.url + '/exchange' , {
+        const  requestBody = JSON.stringify({
+            message: "",
+            data: {
+                exchangeName: name,
+                exchangeDate: date
+            }
+        })
+        fetch('http://localhost:3002' + '/exchange' , {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: {
-                message: "",
-                data: {
-                    exchangeName: name,
-                    exchangeDate: date
+            body: requestBody
+        }).then(response => {
+            const statusCode = response.status,
+                  success = response.ok
+
+            response.json().then(response => {
+                if(statusCode === 400) {
+                    return alert('FAIL!')
+                } else {
+                    return alert('NO FAIL!')
                 }
-            }
+            })
         })
     }
 
 
     return (
-        <card className={"formCard"}>
+        <div className={"formCard"}>
             <h2>Create Your Gift Exchange</h2>
             <form className={"exchangeForm"} onSubmit={handleSubmit} >
                 <input type={"name"} value={name} onChange={handleChangeName} required/>
                 <DatePicker className="date-picker" selected={date} onChange={date => setDate(date)} required/>
-                <input type={"submit"} name={"submit"} className={"submit"} />
+                <input type={"submit"} name={"submit"} className={"submit"}/>
             </form>
-        </card>
+        </div>
     )
 }
 
