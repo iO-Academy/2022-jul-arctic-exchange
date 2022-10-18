@@ -1,4 +1,5 @@
 const DbService = require('../Services/DbService')
+const {ObjectId} = require("mongodb");
 
 const verifyDateIsFuture = (date) => {
     const today = new Date()
@@ -48,4 +49,47 @@ async function createExchange(req, res) {
     }
 }
 
-module.exports = {createExchange: createExchange}
+async function getExchangeFromParticipantUrl(req, res) {
+    const participantUrl = req.params.participantUrl
+    const collection = await DbService.connectToDb()
+    const exchange = await collection.findOne({participantUrl: participantUrl})
+    if (exchange !== undefined) {
+        const responseData = {
+            message: "Successfully retrieved the exchange",
+            data: exchange
+        }
+        res.status(200).json(responseData)
+    } else {
+        const responseData = {
+            message: "Failed to retrieve data - Incorrect URL",
+            data: ""
+        }
+        res.status(400).json(responseData)
+    }
+}
+
+async function getExchangeFromAdminUrl(req, res) {
+    const adminUrl = req.params.adminUrl
+    const collection = await DbService.connectToDb()
+    const exchange = await collection.findOne({adminUrl: adminUrl})
+    if (exchange !== undefined) {
+        const responseData = {
+            message: "Successfully retrieved the exchange",
+            data: exchange
+        }
+        res.status(200).json(responseData)
+    } else {
+        const responseData = {
+            message: "Failed to retrieve data - Incorrect URL",
+            data: ""
+        }
+        res.status(400).json(responseData)
+    }
+}
+
+module.exports = {
+    createExchange: createExchange,
+    getExchangeFromAdminUrl: getExchangeFromAdminUrl,
+    getExchangeFromParticipantUrl: getExchangeFromParticipantUrl
+
+}

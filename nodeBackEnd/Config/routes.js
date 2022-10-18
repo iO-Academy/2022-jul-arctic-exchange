@@ -4,13 +4,17 @@ const exchangeController = require('../Controllers/ExchangeController')
 function routes(app){
     app.post('/exchange', exchangeController.createExchange)
 
-    app.get('/participants/:id', participantController.getParticipants)
+    app.get('/join/:participantUrl', exchangeController.getExchangeFromParticipantUrl)
 
-    app.put('/participants/:id', participantController.editParticipant)
+    app.get('/organise/:adminUrl', exchangeController.getExchangeFromAdminUrl)
 
-    app.post('/participants', participantController.createParticipant)
+    app.post('/join', participantController.createParticipant)
 
-    app.delete('/participants/:id', participantController.deleteParticipant)
+    // app.put('/participants/:id', participantController.editParticipant)
+    //
+    // app.post('/participants', participantController.createParticipant)
+    //
+    // app.delete('/participants/:id', participantController.deleteParticipant)
 }
 
 module.exports = routes

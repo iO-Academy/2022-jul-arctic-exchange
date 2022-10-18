@@ -1,11 +1,10 @@
 const DbService = require('../Services/DbService')
 const ObjectId = require('mongodb').ObjectId
 
-async function getParticipants(req, res) {
-    const oid = ObjectId(req.params.id)
+async function getParticipantsWithExchangeId(req, res) {
+    const exchangeId = ObjectId(req.params.exchangeId)
     const collection = await DbService.connectToDb()
-    const exchange = await collection.findOne({_id: oid})
-    const participants = exchange.participants
+    const exchange = await collection.findOne({_id: exchangeId})
     const responseData = {
         message: "Successfully retrieved all the participants",
         data: exchange.participants
@@ -79,7 +78,7 @@ async function deleteParticipant(req, res) {
 }
 
 module.exports = {
-    getParticipants: getParticipants,
+    getParticipantsWithExchangeId: getParticipantsWithExchangeId,
     createParticipant: createParticipant,
     editParticipant: editParticipant,
     deleteParticipant: deleteParticipant
