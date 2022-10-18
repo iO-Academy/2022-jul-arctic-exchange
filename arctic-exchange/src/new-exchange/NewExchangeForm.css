@@ -1,0 +1,36 @@
+.formCard {
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    z-index: 10;
+    background-color: rgba(255,255,255,.5);
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.exchangeForm {
+    align-content: center;
+    z-index: 10;
+}
+
+h2 {
+    z-index: 10;
+    padding: 10px;
+    font-size: 4rem;
+}
+
+input {
+    margin: 15px;
+    padding: 10px;
+    font-size: 2rem;
+    font-family: 'Permanent Marker', cursive;
+}
+
+.submit {
+    background-color: rgba(12, 148, 62, .5);
+    margin: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 12px;
+}
