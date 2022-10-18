@@ -1,0 +1,44 @@
+.joinPageComponents {
+    z-index: 10;
+}
+
+.exchangeDetails {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    z-index: 10;
+    background-color: rgba(255,255,255,.5);
+    margin: 0 auto;
+    padding: 20px;
+    width: 75%;
+    margin-bottom: 20px;
+}
+
+.addParticipant {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    z-index: 10;
+    background-color: rgba(255,255,255,.5);
+    margin: 0 auto;
+    padding: 20px;
+    width: 75%;
+    margin-bottom: 20px;
+}
+
+.currentlyRegistered {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    z-index: 10;
+    background-color: rgba(255,255,255,.5);
+    margin: 0 auto;
+    padding: 20px;
+    width: 75%;
+}
