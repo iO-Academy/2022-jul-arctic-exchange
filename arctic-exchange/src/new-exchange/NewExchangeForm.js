@@ -56,10 +56,10 @@ const NewExchangeForm = () => {
             <h2>Create Your Gift Exchange</h2>
             <form className={"exchangeForm"} onSubmit={handleSubmit} >
                 <div className="input-wrapper">
-                    <input type={"email"} className={"email"} value={email} onChange={handleChangeEmail} required/>
+                    <input type={"email"} className={"email"} value={email} onChange={handleChangeEmail} placeholder={"email"}required/>
                 </div>
                 <div className="input-wrapper">
-                    <input type={"name"} value={name} onChange={handleChangeName} required/>
+                    <input type={"name"} value={name} onChange={handleChangeName} placeholder={"group name"}required/>
                 </div>
                 <div className="input-wrapper">
                     <DatePicker selected={date} onChange={date => setDate(date)} required/>
