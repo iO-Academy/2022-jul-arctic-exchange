@@ -1,3 +1,7 @@
+.joinPageComponents {
+    z-index: 10;
+}
+
 .exchangeDetails {
     display: flex;
     align-content: center;
