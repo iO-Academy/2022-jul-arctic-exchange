@@ -1,19 +1,21 @@
 import {useEffect, useState} from "react"
 import "./JoinExchangePage.css"
+import { useParams } from 'react-router-dom'
 
 const JoinExchangePage = () => {
     const [exchangeName, setExchangeName] = useState('')
     const [date, setDate] = useState('')
     const [url, setUrl] = useState('')
+    const {participantUrl} = useParams()
 
     useEffect(() => {
-        fetch('http://localhost:3002' + 'join/:participantUrl' , )
+        fetch('http://localhost:3002/join/' + participantUrl)
             .then((response) => {
             return response.json()
         }).then((data) => {
-            setExchangeName(data.exchangeName)
-            setDate(data.exchangeDate)
-            setUrl(data.participantUrl)
+            setExchangeName(data.data.exchangeName)
+            setDate(data.data.exchangeDate)
+            setUrl(data.data.participantUrl)
             })
     }, [])
 
@@ -22,12 +24,12 @@ const JoinExchangePage = () => {
             <div className={"exchangeDetails"}>
                 <h2>{exchangeName}</h2>
                 <h3>{date}</h3>
-                <p>Your private URL is</p>
-                <p>{url}</p>
+                <p>Your URL is</p>
+                <p>http://arcticexchange.com/{url}</p>
             </div>
             <div className={"addParticipant"}>
                 <h2>Add New Participant</h2>
-                <form className={"exchangeForm"}>
+                <form className={"addParticipantForm"}>
                     {/*<input type={"name"} value={name} onChange={handleChangeName} required/>*/}
                     <input type={"type"} className={"input"}/>
                     <input type={"type"} className={"input"}/>

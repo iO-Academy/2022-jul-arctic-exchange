@@ -1,10 +1,3 @@
-.joinPageComponents {
-    z-index: 10;
-    overflow: scroll;
-    overflow-x: auto;
-    overflow-y: hidden;
-}
-
 .exchangeDetails {
     display: flex;
     align-content: center;
@@ -33,7 +26,7 @@
     margin-bottom: 20px;
 }
 
-.exchangeForm {
+.addParticipantForm {
     display: flex;
     align-content: center;
     justify-content: center;
@@ -41,13 +34,13 @@
     flex-wrap: wrap;
 }
 
-.input {
-    font-size: 1rem;
-}
+/*.input {*/
+/*    font-size: 1rem;*/
+/*}*/
 
-.submit {
-    font-size: 1.5rem;
-}
+/*.submit {*/
+/*    font-size: 1.5rem;*/
+/*}*/
 
 .currentlyRegistered {
     display: flex;

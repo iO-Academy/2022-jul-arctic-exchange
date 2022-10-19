@@ -6,9 +6,14 @@ import {useNavigate} from 'react-router-dom';
 
 
 const NewExchangeForm = () => {
+    const [email, setEmail] = useState('')
     const [name, setName] = useState('')
     const [date, setDate] = useState(new Date())
     const navigate = useNavigate()
+
+    const handleChangeEmail = (event) => {
+        setEmail(event.target.value)
+    }
 
     const handleChangeName = (event) => {
         setName(event.target.value)
@@ -50,8 +55,15 @@ const NewExchangeForm = () => {
         <div className={"formCard"}>
             <h2>Create Your Gift Exchange</h2>
             <form className={"exchangeForm"} onSubmit={handleSubmit} >
-                <input type={"name"} value={name} onChange={handleChangeName} required/>
-                <DatePicker className="date-picker" selected={date} onChange={date => setDate(date)} required/>
+                <div className="input-wrapper">
+                    <input type={"email"} className={"email"} value={email} onChange={handleChangeEmail} required/>
+                </div>
+                <div className="input-wrapper">
+                    <input type={"name"} value={name} onChange={handleChangeName} required/>
+                </div>
+                <div className="input-wrapper">
+                    <DatePicker selected={date} onChange={date => setDate(date)} required/>
+                </div>
                 <input type={"submit"} name={"submit"} className={"submit"} />
             </form>
         </div>
