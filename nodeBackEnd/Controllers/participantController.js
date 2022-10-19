@@ -63,46 +63,6 @@ const assignParticipants = async (req, res) => {
     }
 }
 
-// async function editParticipant(req, res) {
-//     const collection = await DbService.connectToDb()
-//     const oid = ObjectId(req.params.id)
-//
-//     const result = await collection.updateOne({_id: oid}, {$set: {done: req.body.data.done}})
-//     if (result.modifiedCount) {
-//         const responseData = {
-//             message: "Successfully changed reminder status",
-//             data: [{}]
-//         }
-//         res.status(200).json(responseData)
-//     } else {
-//         const responseData = {
-//             message: "Failed to create reminder due to incorrect input",
-//             data: [{}]
-//         }
-//         res.status(400).json(responseData)
-//     }
-// }
-//
-// async function deleteParticipant(req, res) {
-//     const collection = await DbService.connectToDb()
-//     const oid = ObjectId(req.params.id)
-//
-//     const result = await collection.deleteOne({_id: oid})
-//     if (result.deletedCount) {
-//         const responseData = {
-//             message: "Successfully deleted reminder",
-//             data: [{}]
-//         }
-//         res.status(200).json(responseData)
-//     } else {
-//         const responseData = {
-//             message: "Failed to create reminder due to incorrect input",
-//             data: [{}]
-//         }
-//         res.status(400).json(responseData)
-//     }
-// }
-
 module.exports = {
     createParticipant: createParticipant,
     assignParticipants: assignParticipants
