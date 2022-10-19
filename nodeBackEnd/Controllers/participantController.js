@@ -18,9 +18,7 @@ async function createParticipant(req, res) {
     }
     const nameLength = newReminderData.name.length
     const addressLength = newReminderData.address.length
-    console.log('you got this far')
     if(nameLength !== 0 && addressLength !== 0 && validator.validate(newReminderData.email)) {
-        console.log('you are here')
         result = await collection.updateOne(
             {_id: exchangeId},
             {$push: {participants: newReminderData}}
