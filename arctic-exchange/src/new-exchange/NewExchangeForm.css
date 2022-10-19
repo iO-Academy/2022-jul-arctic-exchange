@@ -1,32 +1,38 @@
 .formCard {
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    flex-direction: column;
-    flex-wrap: wrap;
     z-index: 10;
     background-color: rgba(255,255,255,.5);
     margin: 0 auto;
-    padding: 20px;
-    width: 75%;
+    width: 50%;
 }
 
 .exchangeForm {
+    display: flex;
     align-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
     z-index: 10;
 }
 
 h2 {
     z-index: 10;
     padding: 10px;
-    font-size: 4rem;
+    font-size: 3rem;
 }
 
 input {
     margin: 15px;
     padding: 10px;
-    font-size: 2rem;
+    font-size: 1rem;
     font-family: 'Permanent Marker', cursive;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.input-wrapper {
+    width: 50%;
 }
 
 .submit {
@@ -35,6 +41,7 @@ input {
     padding: 10px;
     border: none;
     border-radius: 12px;
+    width: 25%;
 }
 
 @media only screen and (max-width: 1500px) {
