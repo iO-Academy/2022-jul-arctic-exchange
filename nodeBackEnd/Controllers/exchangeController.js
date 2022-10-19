@@ -1,6 +1,7 @@
 const DbService = require('../Services/DbService')
 const {ObjectId} = require("mongodb");
 const nodemailer = require('nodemailer')
+const validator = require('email-validator')
 
 const verifyDateIsFuture = (date) => {
     const today = new Date()
@@ -38,6 +39,34 @@ const sendEmail = (participant) => {
     })
 }
 
+const sendEmailToAdmin = (exchangeData) => {
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'arcticexpressemails@gmail.com',
+            pass: 'jijgdwhhdlliuasz'
+        }
+    })
+
+    const mailOptions = {
+        from: 'arcticexpressemails@gmail.com',
+        to: exchangeData.exchangeEmail,
+        subject: 'Arctic Express - ' + exchangeData.exchangeName,
+        text: 'Here are the details of your gift exchange; \n'
+            + 'Gift Exchange Date: ' + exchangeData.exchangeDate + '\n'
+            + 'Admin URL - http://localhost:3001/organise/'+ exchangeData.adminUrl + ' (keep this one private)\n'
+            + 'Participant URL - http://localhost:3001/join/' + exchangeData.participantUrl + ' (share this one around)\n\n'
+            + 'Thanks for using our service! <3\n'
+    }
+
+    transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    })
+}
 
 async function createExchange(req, res) {
     const failureResponse = {
@@ -50,14 +79,15 @@ async function createExchange(req, res) {
     const newExchangeData = {
         exchangeName: req.body.data.exchangeName,
         exchangeDate: req.body.data.exchangeDate,
+        exchangeEmail: req.body.data.exchangeEmail,
         isPostal: req.body.data.isPostal,
         adminUrl: adminUrl,
         participantUrl: participantUrl,
         participants: []
     }
-    const isFuture = verifyDateIsFuture(newExchangeData.exchangeDate)
+
     const nameLength = newExchangeData.exchangeName.length
-    if (isFuture && nameLength !== 0) {
+    if (verifyDateIsFuture(newExchangeData.exchangeDate) && nameLength !== 0 && validator.validate(newExchangeData.exchangeEmail)) {
         const result = await collection.insertOne(newExchangeData)
         if (result.acknowledged) {
             const responseData = {
@@ -68,6 +98,7 @@ async function createExchange(req, res) {
                 }
             }
             res.status(200).json(responseData)
+            sendEmailToAdmin(newExchangeData)
         } else {
             res.status(400).json(failureResponse)
         }
