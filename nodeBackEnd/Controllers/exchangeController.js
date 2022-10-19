@@ -1,93 +1,30 @@
 const DbService = require('../Services/DbService')
-const {ObjectId} = require("mongodb");
-const nodemailer = require('nodemailer')
+const DataValidationService = require('../Services/DataValidationService')
+const GenerateUrlService = require('../Services/GenerateUrlService')
+const EmailService = require('../Services/EmailService')
 const validator = require('email-validator')
 
-const verifyDateIsFuture = (date) => {
-    const today = new Date()
-    const inputDate = new Date(date)
-    return inputDate > today
-}
-
-async function generateUrl() {
-    const {randomBytes} = await import('node:crypto')
-    return randomBytes(8).toString('hex')
-}
-
-const sendEmail = (participant) => {
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'arcticexpressemails@gmail.com',
-            pass: 'jijgdwhhdlliuasz'
-        }
-    })
-
-    const mailOptions = {
-        from: 'arcticexpressemails@gmail.com',
-        to: participant.email,
-        subject: 'Your gift exchange!',
-        text: 'These are the details of your gift exchange! ' + participant.address
-    }
-
-    transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('Email sent: ' + info.response);
-        }
-    })
-}
-
-const sendEmailToAdmin = (exchangeData) => {
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'arcticexpressemails@gmail.com',
-            pass: 'jijgdwhhdlliuasz'
-        }
-    })
-
-    const mailOptions = {
-        from: 'arcticexpressemails@gmail.com',
-        to: exchangeData.exchangeEmail,
-        subject: 'Arctic Express - ' + exchangeData.exchangeName,
-        text: 'Here are the details of your gift exchange; \n'
-            + 'Gift Exchange Date: ' + exchangeData.exchangeDate + '\n'
-            + 'Admin URL - http://localhost:3001/organise/'+ exchangeData.adminUrl + ' (keep this one private)\n'
-            + 'Participant URL - http://localhost:3001/join/' + exchangeData.participantUrl + ' (share this one around)\n\n'
-            + 'Thanks for using our service! <3\n'
-    }
-
-    transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('Email sent: ' + info.response);
-        }
-    })
-}
-
-async function createExchange(req, res) {
+const createExchange = async (req, res) => {
     const failureResponse = {
         message: "Failed to create reminder due to incorrect input",
         data: [{}]
     }
-    const adminUrl = await generateUrl()
-    const participantUrl = await generateUrl()
+    const adminUrl = await GenerateUrlService.generateUrl()
+    const participantUrl = await GenerateUrlService.generateUrl()
     const collection = await DbService.connectToDb()
+    const isPostal = req.body.data.isPostal === 1
     const newExchangeData = {
         exchangeName: req.body.data.exchangeName,
         exchangeDate: req.body.data.exchangeDate,
         exchangeEmail: req.body.data.exchangeEmail,
-        isPostal: req.body.data.isPostal,
+        isPostal: isPostal,
         adminUrl: adminUrl,
         participantUrl: participantUrl,
         participants: []
     }
 
     const nameLength = newExchangeData.exchangeName.length
-    if (verifyDateIsFuture(newExchangeData.exchangeDate) && nameLength !== 0 && validator.validate(newExchangeData.exchangeEmail)) {
+    if (DataValidationService.verifyDateIsFuture(newExchangeData.exchangeDate) && nameLength !== 0 && validator.validate(newExchangeData.exchangeEmail)) {
         const result = await collection.insertOne(newExchangeData)
         if (result.acknowledged) {
             const responseData = {
@@ -98,7 +35,7 @@ async function createExchange(req, res) {
                 }
             }
             res.status(200).json(responseData)
-            sendEmailToAdmin(newExchangeData)
+            EmailService.sendEmailToAdmin(newExchangeData)
         } else {
             res.status(400).json(failureResponse)
         }
@@ -107,7 +44,7 @@ async function createExchange(req, res) {
     }
 }
 
-async function getExchangeFromParticipantUrl(req, res) {
+const getExchangeFromParticipantUrl = async (req, res) => {
     const participantUrl = req.params.participantUrl
     const collection = await DbService.connectToDb()
     const exchange = await collection.findOne({participantUrl: participantUrl})
@@ -126,7 +63,7 @@ async function getExchangeFromParticipantUrl(req, res) {
     }
 }
 
-async function getExchangeFromAdminUrl(req, res) {
+const getExchangeFromAdminUrl = async (req, res) => {
     const adminUrl = req.params.adminUrl
     const collection = await DbService.connectToDb()
     const exchange = await collection.findOne({adminUrl: adminUrl})
@@ -145,20 +82,8 @@ async function getExchangeFromAdminUrl(req, res) {
     }
 }
 
-async function sendEmailToParticipantTEST(req, res) {
-    const email = req.body.data.email
-    sendEmail(req.body.data)
-    const responseData = {
-        message: "Successfully sent an email to " + email,
-        data: ""
-    }
-    res.status(200).json(responseData)
-}
-
 module.exports = {
     createExchange: createExchange,
     getExchangeFromAdminUrl: getExchangeFromAdminUrl,
     getExchangeFromParticipantUrl: getExchangeFromParticipantUrl,
-    sendEmailToParticipantTEST: sendEmailToParticipantTEST
-
 }

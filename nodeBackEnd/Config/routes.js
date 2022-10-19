@@ -10,13 +10,7 @@ function routes(app){
 
     app.post('/join', participantController.createParticipant)
 
-    app.post('/email', exchangeController.sendEmailToParticipantTEST)
-
     app.post('/assign', participantController.assignParticipants)
-
-    // app.put('/participants/:id', participantController.editParticipant)
-
-    // app.delete('/participants/:id', participantController.deleteParticipant)
 }
 
 module.exports = routes
