@@ -145,7 +145,7 @@ async function getExchangeFromAdminUrl(req, res) {
     }
 }
 
-async function sendEmailToParticipant(req, res) {
+async function sendEmailToParticipantTEST(req, res) {
     const email = req.body.data.email
     sendEmail(req.body.data)
     const responseData = {
@@ -159,6 +159,6 @@ module.exports = {
     createExchange: createExchange,
     getExchangeFromAdminUrl: getExchangeFromAdminUrl,
     getExchangeFromParticipantUrl: getExchangeFromParticipantUrl,
-    sendEmailToParticipant: sendEmailToParticipant
+    sendEmailToParticipantTEST: sendEmailToParticipantTEST
 
 }
