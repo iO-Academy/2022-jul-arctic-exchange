@@ -1,5 +1,6 @@
 const DbService = require('../Services/DbService')
 const {ObjectId} = require("mongodb");
+const nodemailer = require('nodemailer')
 
 const verifyDateIsFuture = (date) => {
     const today = new Date()
@@ -11,6 +12,32 @@ async function generateUrl() {
     const {randomBytes} = await import('node:crypto')
     return randomBytes(8).toString('hex')
 }
+
+const sendEmail = (participant) => {
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'arcticexpressemails@gmail.com',
+            pass: 'jijgdwhhdlliuasz'
+        }
+    })
+
+    const mailOptions = {
+        from: 'arcticexpressemails@gmail.com',
+        to: participant.email,
+        subject: 'Your gift exchange!',
+        text: 'These are the details of your gift exchange! ' + participant.address
+    }
+
+    transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    })
+}
+
 
 async function createExchange(req, res) {
     const failureResponse = {
@@ -87,9 +114,20 @@ async function getExchangeFromAdminUrl(req, res) {
     }
 }
 
+async function sendEmailToParticipant(req, res) {
+    const email = req.body.data.email
+    sendEmail(req.body.data)
+    const responseData = {
+        message: "Successfully sent an email to " + email,
+        data: ""
+    }
+    res.status(200).json(responseData)
+}
+
 module.exports = {
     createExchange: createExchange,
     getExchangeFromAdminUrl: getExchangeFromAdminUrl,
-    getExchangeFromParticipantUrl: getExchangeFromParticipantUrl
+    getExchangeFromParticipantUrl: getExchangeFromParticipantUrl,
+    sendEmailToParticipant: sendEmailToParticipant
 
 }

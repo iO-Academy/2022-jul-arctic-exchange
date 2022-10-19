@@ -10,6 +10,8 @@ function routes(app){
 
     app.post('/join', participantController.createParticipant)
 
+    app.post('/email', exchangeController.sendEmailToParticipant)
+
     // app.put('/participants/:id', participantController.editParticipant)
 
     // app.delete('/participants/:id', participantController.deleteParticipant)
