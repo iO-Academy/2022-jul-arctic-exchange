@@ -29,15 +29,20 @@ const JoinExchangePage = () => {
                 <h2>Add New Participant</h2>
                 <form className={"exchangeForm"}>
                     {/*<input type={"name"} value={name} onChange={handleChangeName} required/>*/}
-                    <input type={"type"} />
-                    <input type={"type"} />
-                    <input type={"type"} />
+                    <input type={"type"} className={"input"}/>
+                    <input type={"type"} className={"input"}/>
+                    <input type={"type"} className={"input"}/>
                     <p></p>
                     <input type={"submit"} name={"submit"} className={"submit"} />
                 </form>
             </div>
             <div className={"currentlyRegistered"}>
                 <h2>Currently registered</h2>
+                {/*<p>blah</p>*/}
+                {/*<p>blah</p>*/}
+                {/*<p>blah</p>*/}
+                {/*<p>blah</p>*/}
+                {/*<p>blah</p>*/}
             </div>
         </div>
 
