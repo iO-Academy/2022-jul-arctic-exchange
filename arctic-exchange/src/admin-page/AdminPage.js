@@ -114,12 +114,12 @@ const AdminPage = () => {
                 </div>
                 <p></p>
                     <div className={"addParticipant"}>
+                        <h3>make sure you add yourself to the exchange below! </h3>
                         <h2>Add New Participant</h2>
                         <form className={"addParticipantForm"} onSubmit={handleSubmit}>
                             <input type={"name"} className={"name"} value={name} onChange={handleChangeName} placeholder={"name"} required />
                             <input type={"email"} className={"email"} value={email} onChange={handleChangeEmail} placeholder={"email"}required />
                             <input type={"address"} className={"address"} value={address} onChange={handleChangeAddress} placeholder={"address"}required />
-                            <p></p>
                             <input type={"submit"} name={"submit"} className={"submit"} />
                         </form>
                     </div>
