@@ -11,6 +11,7 @@ const AdminPage = () => {
     const [exchangeId, setExchangeId] = useState('')
     const [email, setEmail] = useState('')
     const [address, setAddress] = useState('')
+    const [pairExchange, setPairExchange] = useState(false)
 
     const handleChangeName = (event) => {
         setName(event.target.value)
@@ -22,6 +23,10 @@ const AdminPage = () => {
 
     const handleChangeAddress = (event) => {
         setAddress(event.target.value)
+    }
+
+    const handlePairExchange = () => {
+        setPairExchange(pairExchange + 1)
     }
 
     useEffect(() => {
@@ -71,7 +76,32 @@ const AdminPage = () => {
         })
     }
 
+    const handleStartExchange = (event) => {
+        event.preventDefault()
+        const requestBody = JSON.stringify({
+            message: "",
+            data: {
+                _id: exchangeId,
+                isPairExchange: pairExchange
+            }
+        })
+        fetch('http://localhost:3002' + '/assign', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: requestBody
+        }).then(response => {
+            const statusCode = response.status,
+                success = response.ok
 
+            response.json().then(response => {
+                if(statusCode === 400) {
+                    return alert('FAIL!')
+                } else {
+                    return alert('NO FAIL!')
+                }
+            })
+        })
+    }
 
     return (
         <div>
@@ -95,6 +125,10 @@ const AdminPage = () => {
                     <h2 className={"participantList"}>participant list:</h2>
                     {participantList}
                 </div>
+                <div className={"pair-check"}>
+                    <input className={"checkbox"} type={"checkbox"} onChange={handlePairExchange}/> allow allocation of two people as each other's gift giver
+                </div>
+                <button name={"this"} className={"start"} onClick={handleStartExchange}>start exchange!</button>
             </div>
         </div>
     )
