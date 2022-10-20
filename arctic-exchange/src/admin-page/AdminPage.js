@@ -72,7 +72,7 @@ const AdminPage = () => {
                 if(statusCode === 400) {
                     return alert('FAIL!')
                 } else {
-                    return alert('YAY! you are in the exchange as well!')
+                    return alert("YAY! They've been added to the exchange!")
                 }
             })
         })
