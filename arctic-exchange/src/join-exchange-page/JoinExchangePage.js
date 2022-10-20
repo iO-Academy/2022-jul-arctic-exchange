@@ -47,7 +47,7 @@ const JoinExchangePage = () => {
                 _id: exchangeId
             }
         })
-        fetch('http://localhost:3002' + '/join', {
+        fetch('http://localhost:3002/join', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: requestBody

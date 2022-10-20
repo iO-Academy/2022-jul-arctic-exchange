@@ -25,7 +25,7 @@ const NewExchangeForm = () => {
     }
 
     const handlePostalExchangeSelection = () => {
-        setPostalExchange(postalExchange + true)
+        setPostalExchange(postalExchange + 1)
     }
 
     const handleSubmit = (event) => {

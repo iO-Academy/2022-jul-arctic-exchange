@@ -16,8 +16,32 @@ const App = () => {
                               rel="stylesheet"/>
             </header>
             <div className="snowflakes" aria-hidden="true">
-                <div className="intro"> Find 250+ Ready to use demo at <a
-                    href="https://codeconvey.com">Codeconvey.com</a></div>
+                <div className="snowflake">❅</div>
+                <div className="snowflake">❅</div>
+                <div className="snowflake">❆</div>
+                <div className="snowflake">❄</div>
+                <div className="snowflake">❅</div>
+                <div className="snowflake">❆</div>
+                <div className="snowflake">❄</div>
+                <div className="snowflake">❅</div>
+                <div className="snowflake">❆</div>
+                <div className="snowflake">❄</div>
+                <div className="snowflake">❄</div>
+                <div className="snowflake">❄</div>
+                <div className="snowflake">❄</div>
+                <div className="snowflake">❅</div>
+                <div className="snowflake">❅</div>
+                <div className="snowflake">❆</div>
+                <div className="snowflake">❄</div>
+                <div className="snowflake">❅</div>
+                <div className="snowflake">❆</div>
+                <div className="snowflake">❄</div>
+                <div className="snowflake">❅</div>
+                <div className="snowflake">❆</div>
+                <div className="snowflake">❄</div>
+                <div className="snowflake">❄</div>
+                <div className="snowflake">❄</div>
+                <div className="snowflake">❄</div>
                 <div className="snowflake">❅</div>
                 <div className="snowflake">❅</div>
                 <div className="snowflake">❆</div>
