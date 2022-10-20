@@ -1,7 +1,6 @@
 const verifyDateIsFuture = (date) => {
     const today = new Date()
-    const inputDate = new Date(date)
-    return inputDate > today
+    return date > today
 }
 
 module.exports = {verifyDateIsFuture: verifyDateIsFuture}
