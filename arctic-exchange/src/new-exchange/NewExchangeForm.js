@@ -2,10 +2,19 @@ import {useState} from 'react'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 import "./NewExchangeForm.css"
+import {useNavigate} from 'react-router-dom';
+
 
 const NewExchangeForm = () => {
+    const [email, setEmail] = useState('')
     const [name, setName] = useState('')
     const [date, setDate] = useState(new Date())
+    const [postalExchange, setPostalExchange] = useState(false)
+    const navigate = useNavigate()
+
+    const handleChangeEmail = (event) => {
+        setEmail(event.target.value)
+    }
 
     const handleChangeName = (event) => {
         setName(event.target.value)
@@ -15,13 +24,18 @@ const NewExchangeForm = () => {
         setDate(event.target.value)
     }
 
+    const handlePostalExchangeSelection = () => {
+        setPostalExchange(postalExchange + true)
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault()
         const  requestBody = JSON.stringify({
             message: "",
             data: {
                 exchangeName: name,
-                exchangeDate: date
+                exchangeDate: date,
+                isPostal: postalExchange
             }
         })
         fetch('http://localhost:3002' + '/exchange' , {
@@ -36,7 +50,7 @@ const NewExchangeForm = () => {
                 if(statusCode === 400) {
                     return alert('FAIL!')
                 } else {
-                    return alert('NO FAIL!')
+                    return navigate('/join')
                 }
             })
         })
@@ -47,9 +61,19 @@ const NewExchangeForm = () => {
         <div className={"formCard"}>
             <h2>Create Your Gift Exchange</h2>
             <form className={"exchangeForm"} onSubmit={handleSubmit} >
-                <input type={"name"} value={name} onChange={handleChangeName} required/>
-                <DatePicker className="date-picker" selected={date} onChange={date => setDate(date)} required/>
-                <input type={"submit"} name={"submit"} className={"submit"}/>
+                <div className="input-wrapper">
+                    <input type={"email"} className={"email"} value={email} onChange={handleChangeEmail} placeholder={"email"}required/>
+                </div>
+                <div className="input-wrapper">
+                    <input type={"name"} value={name} onChange={handleChangeName} placeholder={"group name"}required/>
+                </div>
+                <div className="input-wrapper">
+                    <DatePicker selected={date} onChange={date => setDate(date)} required/>
+                </div>
+                <div className={"postal-check"}>
+                    <input className={"checkbox"} type={"checkbox"} onChange={handlePostalExchangeSelection}/> postal exchange?
+                </div>
+                <input type={"submit"} name={"submit"} className={"submit"} />
             </form>
         </div>
     )
