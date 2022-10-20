@@ -70,7 +70,38 @@ const assignParticipants = async (req, res) => {
     }
 }
 
+const excludeParticipants = async (req, res) => {
+    let result
+    const failedData = {
+        message: "Failed to create participant due to incorrect input",
+        data: [{}]
+    }
+    const collection = await DbService.connectToDb()
+    const exchangeId = ObjectId(req.body.data._id)
+    const participantEmail = req.body.data.email
+    const participantExclusion = []
+
+    if(participantExclusion.length !== 0 && validator.validate(participantEmail)) {
+        result = await collection.updateOne(
+            {_id: exchangeId},
+            {$push: {participants: participantData}}
+        )
+        if (result.modifiedCount) {
+            const responseData = {
+                message: "Successfully created participant",
+                data: [{}]
+            }
+            res.status(200).json(responseData)
+        } else {
+            res.status(400).json(failedData)
+        }
+    } else {
+        res.status(400).json(failedData)
+    }
+}
+
 module.exports = {
     createParticipant: createParticipant,
-    assignParticipants: assignParticipants
+    assignParticipants: assignParticipants,
+    excludeParticipants: excludeParticipants
 }

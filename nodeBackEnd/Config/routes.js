@@ -11,6 +11,8 @@ function routes(app){
     app.post('/join', participantController.createParticipant)
 
     app.post('/assign', participantController.assignParticipants)
+
+    app.post('/exclude', participantController.excludeParticipants)
 }
 
 module.exports = routes
