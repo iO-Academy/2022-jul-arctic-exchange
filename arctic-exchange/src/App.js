@@ -4,6 +4,7 @@ import NewExchangeForm from "./new-exchange/NewExchangeForm"
 import JoinExchangePage from "./join-exchange-page/JoinExchangePage"
 import AdminSuccessPage from "./admin-success-page/AdminSuccessPage"
 import ParticipantSuccessPage from "./participant-success-page/ParticipantSuccessPage"
+import AdminCreateSuccessPage from "./admin-create-success-page/AdminCreateSuccessPage"
 import AdminPage from "./admin-page/AdminPage"
 import imageSrc from "./envelopeBackground.jpg"
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
@@ -59,6 +60,7 @@ const App = () => {
                     <Route path="organise/:adminUrl" element={<AdminPage />} />
                     <Route path="organise/success" element={<AdminSuccessPage />} />
                     <Route path="join/success" element={<ParticipantSuccessPage />} />
+                    <Route path="organise/createSuccess" element={<AdminCreateSuccessPage />} />
                 </Routes>
             </BrowserRouter>
         </div>
