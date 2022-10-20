@@ -2,6 +2,7 @@
 import './App.css'
 import NewExchangeForm from "./new-exchange/NewExchangeForm"
 import JoinExchangePage from "./join-exchange-page/JoinExchangePage"
+import AdminPage from "./admin-page/AdminPage"
 import imageSrc from "./envelopeBackground.jpg"
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import CurrentParticipantPage from "./current-participant-page/CurrentParticipantPage";
@@ -53,6 +54,7 @@ const App = () => {
                     <Route path="/" index element={<NewExchangeForm />} />
                     <Route path="join/:participantUrl" element={<JoinExchangePage />} />
                     <Route path="participants/:participantUrl" element={<CurrentParticipantPage />} />
+                    <Route path="admin/:adminUrl" element={<AdminPage />} />
                 </Routes>
             </BrowserRouter>
         </div>
