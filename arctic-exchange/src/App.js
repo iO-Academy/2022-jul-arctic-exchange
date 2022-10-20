@@ -54,7 +54,7 @@ const App = () => {
                     <Route path="/" index element={<NewExchangeForm />} />
                     <Route path="join/:participantUrl" element={<JoinExchangePage />} />
                     <Route path="participants/:participantUrl" element={<CurrentParticipantPage />} />
-                    <Route path="admin/:adminUrl" element={<AdminPage />} />
+                    <Route path="organise/:adminUrl" element={<AdminPage />} />
                 </Routes>
             </BrowserRouter>
         </div>

@@ -49,7 +49,7 @@ const NewExchangeForm = () => {
 
             response.json().then(response => {
                 if(statusCode === 400) {
-                    return alert('FAIL!')
+                    return alert('Oops this failed, please try again!')
                 } else {
                     return navigate('/join')
                 }
