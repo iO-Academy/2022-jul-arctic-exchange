@@ -17,6 +17,7 @@ const createParticipant = async (req, res) => {
         name: req.body.data.name,
         email: req.body.data.email,
         address: req.body.data.address,
+        recipient: {},
         exclusions: []
     }
     const nameLength = participantData.name.length
@@ -42,10 +43,16 @@ const createParticipant = async (req, res) => {
 
 const assignParticipants = async (req, res) => {
     const exchangeId = ObjectId(req.body.data._id)
+    const isPairExchange = req.body.data.isPairExchange === 1
+    let assignedParticipants
     const collection = await DbService.connectToDb()
     const exchange = await collection.findOne({_id: exchangeId})
     if (exchange !== undefined) {
-        const assignedParticipants = assignRecipientService.assignRecipientsToParticipants(exchange.participants)
+        if (isPairExchange) {
+            assignedParticipants = assignRecipientService.assignRecipientsToParticipantsPairs(exchange.participants)
+        } else {
+            assignedParticipants = assignRecipientService.assignRecipientsToParticipantsUnique(exchange.participants)
+        }
         assignedParticipants.forEach((participant) => {
             EmailService.sendEmailToParticipant(participant, exchange)
         })
