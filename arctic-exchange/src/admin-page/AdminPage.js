@@ -117,7 +117,6 @@ const AdminPage = () => {
                             <input type={"name"} className={"name"} value={name} onChange={handleChangeName} placeholder={"name"} required />
                             <input type={"email"} className={"email"} value={email} onChange={handleChangeEmail} placeholder={"email"}required />
                             <input type={"address"} className={"address"} value={address} onChange={handleChangeAddress} placeholder={"address"}required />
-                            <p></p>
                             <input type={"submit"} name={"submit"} className={"submit"} />
                         </form>
                     </div>
