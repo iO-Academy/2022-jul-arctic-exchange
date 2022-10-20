@@ -43,7 +43,7 @@ const createParticipant = async (req, res) => {
 
 const assignParticipants = async (req, res) => {
     const exchangeId = ObjectId(req.body.data._id)
-    const isPairExchange = req.body.data.isPairExchange
+    const isPairExchange = req.body.data.isPairExchange === 1
     let assignedParticipants
     const collection = await DbService.connectToDb()
     const exchange = await collection.findOne({_id: exchangeId})
