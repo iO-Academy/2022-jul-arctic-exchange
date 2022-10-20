@@ -15,8 +15,8 @@ const sendEmailToAdmin = (exchangeData) => {
         subject: 'Arctic Express - ' + exchangeData.exchangeName,
         text: 'Here are the details of your gift exchange; \n'
             + 'Gift Exchange Date: ' + exchangeData.exchangeDate + '\n'
-            + 'Admin URL - http://localhost:3001/organise/'+ exchangeData.adminUrl + ' (keep this one private)\n'
-            + 'Participant URL - http://localhost:3001/join/' + exchangeData.participantUrl + ' (share this one around)\n\n'
+            + 'Admin URL - http://localhost:3000/organise/'+ exchangeData.adminUrl + ' (keep this one private)\n'
+            + 'Participant URL - http://localhost:3000/join/' + exchangeData.participantUrl + ' (share this one around)\n\n'
             + 'Thanks for using our service! <3\n'
     }
 

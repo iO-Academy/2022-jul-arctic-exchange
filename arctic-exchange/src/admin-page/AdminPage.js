@@ -13,6 +13,7 @@ const AdminPage = () => {
     const [email, setEmail] = useState('')
     const [address, setAddress] = useState('')
     const [pairExchange, setPairExchange] = useState(false)
+    const [isPostal, setIsPostal] = useState(true)
     const  navigate = useNavigate()
 
     const handleChangeName = (event) => {
@@ -40,7 +41,7 @@ const AdminPage = () => {
             setDate(data.data.exchangeDate)
             setExchangeId(data.data._id)
             setParticipants(data.data.participants)
-            console.log(participants)
+            setIsPostal(data.data.isPostal)
         })
     }, [])
 
@@ -118,8 +119,8 @@ const AdminPage = () => {
                         <h2>Add New Participant</h2>
                         <form className={"addParticipantForm"} onSubmit={handleSubmit}>
                             <input type={"name"} className={"name"} value={name} onChange={handleChangeName} placeholder={"name"} required />
-                            <input type={"email"} className={"email"} value={email} onChange={handleChangeEmail} placeholder={"email"}required />
-                            <input type={"address"} className={"address"} value={address} onChange={handleChangeAddress} placeholder={"address"}required />
+                            <input type={"email"} className={"email"} value={email} onChange={handleChangeEmail} placeholder={"email"} required />
+                            {isPostal ? <input type={"address"} className={"address"} value={address} onChange={handleChangeAddress} placeholder={"address"} required /> : ''}
                             <input type={"submit"} name={"submit"} className={"submit"} />
                         </form>
                     </div>
