@@ -81,14 +81,6 @@ const JoinExchangePage = () => {
                     <input type={"submit"} name={"submit"} className={"submit"} />
                 </form>
             </div>
-            {/*<div className={"currentlyRegistered"}>*/}
-            {/*    <h2>Currently registered</h2>*/}
-            {/*    /!*<p>blah</p>*!/*/}
-            {/*    /!*<p>blah</p>*!/*/}
-            {/*    /!*<p>blah</p>*!/*/}
-            {/*    /!*<p>blah</p>*!/*/}
-            {/*    /!*<p>blah</p>*!/*/}
-            {/*</div>*/}
         </div>
 
     )
