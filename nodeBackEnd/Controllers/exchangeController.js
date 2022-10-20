@@ -1,36 +1,30 @@
 const DbService = require('../Services/DbService')
-const {ObjectId} = require("mongodb");
+const DataValidationService = require('../Services/DataValidationService')
+const GenerateUrlService = require('../Services/GenerateUrlService')
+const EmailService = require('../Services/EmailService')
+const validator = require('email-validator')
 
-const verifyDateIsFuture = (date) => {
-    const today = new Date()
-    const inputDate = new Date(date)
-    return inputDate > today
-}
-
-async function generateUrl() {
-    const {randomBytes} = await import('node:crypto')
-    return randomBytes(8).toString('hex')
-}
-
-async function createExchange(req, res) {
+const createExchange = async (req, res) => {
     const failureResponse = {
         message: "Failed to create reminder due to incorrect input",
         data: [{}]
     }
-    const adminUrl = await generateUrl()
-    const participantUrl = await generateUrl()
+    const adminUrl = await GenerateUrlService.generateUrl()
+    const participantUrl = await GenerateUrlService.generateUrl()
     const collection = await DbService.connectToDb()
+    const isPostal = req.body.data.isPostal === 1
     const newExchangeData = {
         exchangeName: req.body.data.exchangeName,
-        exchangeDate: req.body.data.exchangeDate,
-        isPostal: req.body.data.isPostal,
+        exchangeDate: DataValidationService.convertDate(req.body.data.exchangeDate),
+        exchangeEmail: req.body.data.exchangeEmail,
+        isPostal: isPostal,
         adminUrl: adminUrl,
         participantUrl: participantUrl,
         participants: []
     }
-    const isFuture = verifyDateIsFuture(newExchangeData.exchangeDate)
+
     const nameLength = newExchangeData.exchangeName.length
-    if (isFuture && nameLength !== 0) {
+    if (DataValidationService.verifyDateIsFuture(req.body.data.exchangeDate) && nameLength !== 0 && validator.validate(newExchangeData.exchangeEmail)) {
         const result = await collection.insertOne(newExchangeData)
         if (result.acknowledged) {
             const responseData = {
@@ -41,6 +35,7 @@ async function createExchange(req, res) {
                 }
             }
             res.status(200).json(responseData)
+            EmailService.sendEmailToAdmin(newExchangeData)
         } else {
             res.status(400).json(failureResponse)
         }
@@ -49,7 +44,7 @@ async function createExchange(req, res) {
     }
 }
 
-async function getExchangeFromParticipantUrl(req, res) {
+const getExchangeFromParticipantUrl = async (req, res) => {
     const participantUrl = req.params.participantUrl
     const collection = await DbService.connectToDb()
     const exchange = await collection.findOne({participantUrl: participantUrl})
@@ -68,7 +63,7 @@ async function getExchangeFromParticipantUrl(req, res) {
     }
 }
 
-async function getExchangeFromAdminUrl(req, res) {
+const getExchangeFromAdminUrl = async (req, res) => {
     const adminUrl = req.params.adminUrl
     const collection = await DbService.connectToDb()
     const exchange = await collection.findOne({adminUrl: adminUrl})
@@ -90,6 +85,5 @@ async function getExchangeFromAdminUrl(req, res) {
 module.exports = {
     createExchange: createExchange,
     getExchangeFromAdminUrl: getExchangeFromAdminUrl,
-    getExchangeFromParticipantUrl: getExchangeFromParticipantUrl
-
+    getExchangeFromParticipantUrl: getExchangeFromParticipantUrl,
 }

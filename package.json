@@ -1,5 +1,8 @@
 {
   "dependencies": {
-    "email-validator": "^2.0.4"
+    "array-shuffle": "^3.0.0",
+    "array-unsort": "^1.1.6",
+    "email-validator": "^2.0.4",
+    "nodemailer": "^6.8.0"
   }
 }
