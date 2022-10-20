@@ -1,5 +1,13 @@
-.joinPageComponents {
-    z-index: 10;
+.currentPageComponents {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    z-index: 11;
+    margin: 0 auto;
+    padding: 10px;
+    width: 50%;
 }
 
 .exchangeDetails {
@@ -8,7 +16,20 @@
     justify-content: center;
     flex-direction: column;
     flex-wrap: wrap;
-    z-index: 10;
+    z-index: 11;
+    background-color: rgba(255,255,255,.5);
+    margin: 0 auto;
+    padding: 20px;
+    width: 50%;
+}
+
+.participantContainer {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    z-index: 11;
     background-color: rgba(255,255,255,.5);
     margin: 0 auto;
     padding: 20px;
@@ -16,40 +37,29 @@
     margin-bottom: 20px;
 }
 
-.addParticipant {
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    flex-direction: column;
-    flex-wrap: wrap;
-    z-index: 10;
-    background-color: rgba(255,255,255,.5);
-    margin: 0 auto;
-    padding: 20px;
-    width: 50%;
-    margin-bottom: 20px;
+.exchangeTitle {
+    padding: 0;
 }
 
-.addParticipantForm {
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    flex-direction: column;
-    flex-wrap: wrap;
+.participantList {
+    margin: 10px;
 }
 
-.currentlyRegistered {
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    flex-direction: column;
-    flex-wrap: wrap;
-    z-index: 10;
-    background-color: rgba(255,255,255,.5);
-    margin: 0 auto;
-    padding: 20px;
-    width: 75%;
-    overflow: scroll;
-    overflow-x: auto;
-    overflow-y: hidden;
+.participant {
+    margin: 0;
+}
+
+@media only screen and (max-width: 600px) {
+    .currentPageComponents {
+        width: 100%;
+    }
+
+    .exchangeTitle {
+        padding: 10px;
+        margin: 10px;
+    }
+
+    .participantList {
+        padding: 0;
+    }
 }
