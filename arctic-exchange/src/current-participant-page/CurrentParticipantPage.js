@@ -1,7 +1,6 @@
 import {useParams} from "react-router-dom"
 import {useEffect, useState} from "react"
 import './CurrentParticipantPage.css'
-import { format } from 'date-fns'
 
 const CurrentParticipantPage = () => {
     const {participantUrl} = useParams()
