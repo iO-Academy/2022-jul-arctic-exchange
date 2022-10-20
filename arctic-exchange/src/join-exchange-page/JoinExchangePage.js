@@ -61,7 +61,7 @@ const JoinExchangePage = () => {
                 if(statusCode === 400) {
                     return alert('FAIL!')
                 } else {
-                    return navigate('/participants')
+                    return navigate('/participants/' + participantUrl)
                 }
             })
         })
