@@ -2,7 +2,8 @@ import {useState} from 'react'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 import "./NewExchangeForm.css"
-import {useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom'
+import {useParams} from "react-router-dom"
 
 
 const NewExchangeForm = () => {
@@ -11,6 +12,7 @@ const NewExchangeForm = () => {
     const [date, setDate] = useState(new Date())
     const [postalExchange, setPostalExchange] = useState(false)
     const navigate = useNavigate()
+    const {adminUrl} = useParams()
 
     const handleChangeEmail = (event) => {
         setEmail(event.target.value)
@@ -51,7 +53,7 @@ const NewExchangeForm = () => {
                 if(statusCode === 400) {
                     return alert('Oops this failed, please try again!')
                 } else {
-                    return navigate('/join')
+                    return navigate('/organise/createSuccess')
                 }
             })
         })

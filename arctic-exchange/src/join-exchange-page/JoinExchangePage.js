@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react"
 import "./JoinExchangePage.css"
 import { useParams } from 'react-router-dom'
+import {useNavigate} from "react-router-dom"
 
 const JoinExchangePage = () => {
     const [exchangeName, setExchangeName] = useState('')
@@ -11,6 +12,7 @@ const JoinExchangePage = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [address, setAddress] = useState('')
+    const navigate = useNavigate()
 
     const handleChangeName = (event) => {
         setName(event.target.value)
@@ -59,7 +61,7 @@ const JoinExchangePage = () => {
                 if(statusCode === 400) {
                     return alert('FAIL!')
                 } else {
-                    return alert('NO FAIL!')
+                    return navigate('/join/success')
                 }
             })
         })

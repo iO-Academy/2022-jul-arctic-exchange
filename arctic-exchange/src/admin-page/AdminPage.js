@@ -1,6 +1,7 @@
 import {useParams} from "react-router-dom"
 import {useEffect, useState} from "react"
 import './AdminPage.css'
+import {useNavigate} from "react-router-dom"
 
 const AdminPage = () => {
     const {adminUrl} = useParams()
@@ -12,6 +13,7 @@ const AdminPage = () => {
     const [email, setEmail] = useState('')
     const [address, setAddress] = useState('')
     const [pairExchange, setPairExchange] = useState(false)
+    const  navigate = useNavigate()
 
     const handleChangeName = (event) => {
         setName(event.target.value)
@@ -97,7 +99,7 @@ const AdminPage = () => {
                 if(statusCode === 400) {
                     return alert('FAIL!')
                 } else {
-                    return alert('NO FAIL!')
+                    return navigate('/organise/success')
                 }
             })
         })
