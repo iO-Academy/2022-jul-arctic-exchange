@@ -30,6 +30,15 @@ input {
     flex-wrap: wrap;
 }
 
+.postal-check {
+    display: flex;
+    justify-content: center;
+}
+
+.checkbox {
+    margin: 5px;
+}
+
 .submit {
     background-color: rgba(12, 148, 62, .5);
     margin: 20px;

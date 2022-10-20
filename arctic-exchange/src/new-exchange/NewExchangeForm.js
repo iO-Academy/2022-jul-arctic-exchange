@@ -9,6 +9,7 @@ const NewExchangeForm = () => {
     const [email, setEmail] = useState('')
     const [name, setName] = useState('')
     const [date, setDate] = useState(new Date())
+    const [postalExchange, setPostalExchange] = useState(false)
     const navigate = useNavigate()
 
     const handleChangeEmail = (event) => {
@@ -23,13 +24,18 @@ const NewExchangeForm = () => {
         setDate(event.target.value)
     }
 
+    const handlePostalExchangeSelection = () => {
+        setPostalExchange(postalExchange + true)
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault()
         const  requestBody = JSON.stringify({
             message: "",
             data: {
                 exchangeName: name,
-                exchangeDate: date
+                exchangeDate: date,
+                isPostal: postalExchange
             }
         })
         fetch('http://localhost:3002' + '/exchange' , {
@@ -63,6 +69,9 @@ const NewExchangeForm = () => {
                 </div>
                 <div className="input-wrapper">
                     <DatePicker selected={date} onChange={date => setDate(date)} required/>
+                </div>
+                <div className={"postal-check"}>
+                    <input className={"checkbox"} type={"checkbox"} onChange={handlePostalExchangeSelection}/> postal exchange?
                 </div>
                 <input type={"submit"} name={"submit"} className={"submit"} />
             </form>
