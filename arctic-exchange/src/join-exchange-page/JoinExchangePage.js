@@ -1,8 +1,10 @@
 import {useEffect, useState} from "react"
 import "./JoinExchangePage.css"
 import { useParams } from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 
 const JoinExchangePage = () => {
+    const navigate = useNavigate()
     const [exchangeName, setExchangeName] = useState('')
     const [date, setDate] = useState('')
     const [url, setUrl] = useState('')
@@ -59,7 +61,7 @@ const JoinExchangePage = () => {
                 if(statusCode === 400) {
                     return alert('FAIL!')
                 } else {
-                    return alert('NO FAIL!')
+                    return navigate('/participants')
                 }
             })
         })
