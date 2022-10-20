@@ -10,9 +10,7 @@ function routes(app){
 
     app.post('/join', participantController.createParticipant)
 
-    // app.put('/participants/:id', participantController.editParticipant)
-
-    // app.delete('/participants/:id', participantController.deleteParticipant)
+    app.post('/assign', participantController.assignParticipants)
 }
 
 module.exports = routes
