@@ -25,7 +25,7 @@ const NewExchangeForm = () => {
     }
 
     const handlePostalExchangeSelection = () => {
-        setPostalExchange(postalExchange + true)
+        setPostalExchange(postalExchange + 1)
     }
 
     const handleSubmit = (event) => {
@@ -35,7 +35,8 @@ const NewExchangeForm = () => {
             data: {
                 exchangeName: name,
                 exchangeDate: date,
-                isPostal: postalExchange
+                isPostal: postalExchange,
+                exchangeEmail: email
             }
         })
         fetch('http://localhost:3002' + '/exchange' , {

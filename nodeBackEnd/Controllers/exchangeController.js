@@ -13,18 +13,19 @@ const createExchange = async (req, res) => {
     const participantUrl = await GenerateUrlService.generateUrl()
     const collection = await DbService.connectToDb()
     const isPostal = req.body.data.isPostal === 1
+    const exchangeDate = req.body.data.exchangeDate.substring(0, 10)
+    const exchangeDateObject = new Date(exchangeDate)
     const newExchangeData = {
         exchangeName: req.body.data.exchangeName,
-        exchangeDate: req.body.data.exchangeDate,
+        exchangeDate: exchangeDateObject.toLocaleDateString('en-GB'),
         exchangeEmail: req.body.data.exchangeEmail,
         isPostal: isPostal,
         adminUrl: adminUrl,
         participantUrl: participantUrl,
         participants: []
     }
-
     const nameLength = newExchangeData.exchangeName.length
-    if (DataValidationService.verifyDateIsFuture(newExchangeData.exchangeDate) && nameLength !== 0 && validator.validate(newExchangeData.exchangeEmail)) {
+    if (DataValidationService.verifyDateIsFuture(exchangeDateObject) && nameLength !== 0 && validator.validate(newExchangeData.exchangeEmail)) {
         const result = await collection.insertOne(newExchangeData)
         if (result.acknowledged) {
             const responseData = {
