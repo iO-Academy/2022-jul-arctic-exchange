@@ -1,0 +1,11 @@
+.adminPageComponents {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    z-index: 11;
+    margin: 0 auto;
+    padding: 10px;
+    /*width: 50%;*/
+}
