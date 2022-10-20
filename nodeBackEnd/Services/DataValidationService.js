@@ -4,4 +4,12 @@ const verifyDateIsFuture = (date) => {
     return inputDate > today
 }
 
-module.exports = {verifyDateIsFuture: verifyDateIsFuture}
+const convertDate = (rawDate) => {
+    const date = new Date(rawDate)
+    return date.toDateString()
+}
+
+module.exports = {
+    verifyDateIsFuture: verifyDateIsFuture,
+    convertDate: convertDate
+}

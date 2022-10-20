@@ -15,7 +15,7 @@ const createExchange = async (req, res) => {
     const isPostal = req.body.data.isPostal === 1
     const newExchangeData = {
         exchangeName: req.body.data.exchangeName,
-        exchangeDate: req.body.data.exchangeDate,
+        exchangeDate: DataValidationService.convertDate(req.body.data.exchangeDate),
         exchangeEmail: req.body.data.exchangeEmail,
         isPostal: isPostal,
         adminUrl: adminUrl,
@@ -24,7 +24,7 @@ const createExchange = async (req, res) => {
     }
 
     const nameLength = newExchangeData.exchangeName.length
-    if (DataValidationService.verifyDateIsFuture(newExchangeData.exchangeDate) && nameLength !== 0 && validator.validate(newExchangeData.exchangeEmail)) {
+    if (DataValidationService.verifyDateIsFuture(req.body.data.exchangeDate) && nameLength !== 0 && validator.validate(newExchangeData.exchangeEmail)) {
         const result = await collection.insertOne(newExchangeData)
         if (result.acknowledged) {
             const responseData = {

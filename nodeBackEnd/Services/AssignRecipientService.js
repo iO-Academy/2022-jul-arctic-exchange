@@ -1,7 +1,7 @@
-const shuffleList = require("shuffle-list");
+const { unsort } = require("array-unsort");
 
-function assignRecipientsToParticipants(participants) {
-    const shuffledParticipants = shuffleList(participants)
+function assignRecipientsToParticipantsUnique(participants) {
+    const shuffledParticipants = unsort(participants)
     for (let i = 0; i<=participants.length-1; i++) {
         if (i === participants.length-1) {
             shuffledParticipants[i].recipient = shuffledParticipants[0]
@@ -14,4 +14,15 @@ function assignRecipientsToParticipants(participants) {
     return shuffledParticipants
 }
 
-module.exports = {assignRecipientsToParticipants: assignRecipientsToParticipants}
+function assignRecipientsToParticipantsPairs(participants) {
+    const shuffledParticipants = unsort(participants, 'unique-idx')
+    for (let i = 0; i<=participants.length-1; i++) {
+       participants[i].recipient = shuffledParticipants[i]
+    }
+    return participants
+}
+
+module.exports = {
+    assignRecipientsToParticipantsUnique: assignRecipientsToParticipantsUnique,
+    assignRecipientsToParticipantsPairs: assignRecipientsToParticipantsPairs
+}
